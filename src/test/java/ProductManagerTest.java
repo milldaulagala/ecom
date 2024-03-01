@@ -38,6 +38,7 @@ public class ProductManagerTest {
 
         //Then
         assertTrue(result);
+        assertTrue(result1);
         assertEquals("laptop",name1);
         assertEquals("monitor",name2);
     }
