@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Objects;
+
 public class ProductManager {
 
     private int count = 0;
@@ -20,4 +22,16 @@ public class ProductManager {
         return itemName[i];
     }
 
+    public String searchByProductName(String productName) {
+        String notFound = "NotFound";
+
+        for (int i = 0; i < itemName.length; i++) {
+
+            if (Objects.equals(itemName[i], productName)) {
+                return productName;
+            }
+        }
+
+        return notFound;
+    }
 }
