@@ -18,11 +18,11 @@ public class ProductManagerTest {
         boolean result2 = pm.addProduct("Fan", "5 speed Fan", 15, 0);
 
         //then
-        Assertions.assertTrue(result);
-        Assertions.assertTrue(result1);
-        Assertions.assertTrue(result2);
+        assertTrue(result);
+        assertTrue(result1);
+        assertTrue(result2);
 
-        Assertions.assertTrue(pm.getNumberOfProducts()>0);
+        assertTrue(pm.getNumberOfProducts()>0);
         assertEquals(3, pm.getNumberOfProducts());
     }
 
@@ -71,6 +71,35 @@ public class ProductManagerTest {
     assertEquals("laptop", productName);
     }
 
+
+    @Test
+    public void testSearchByProductNameFindAllProducts() {
+
+        //given
+        String[] itemName = {"laptop", "desktop", "keyboard", "monitor"};
+        ProductManager pm = new ProductManager();
+        pm.addProduct(itemName[0], "computer", 1000, 10);
+        pm.addProduct(itemName[1], "computer", 1000, 10);
+        pm.addProduct(itemName[2], "computer", 1000, 10);
+        pm.addProduct(itemName[3], "computer", 1000, 10);
+
+        //when
+        String[]  resultProduct = new String[4];
+        int i = 0;
+        for (String name : itemName) {
+            String productName = pm.searchByProductName(name.toUpperCase());
+            resultProduct[i] = productName;
+            i++;
+        }
+
+        //then
+        i = 0;
+        for (String name : itemName) {
+            assertEquals(name, resultProduct[i]);
+            i++;
+        }
+
+    }
 
 
 
