@@ -32,7 +32,8 @@ public class ProductManager {
         String result = "NotFound";
 
         //if (productName != null) {
-        // we only search the number of items in the array using count variable
+        // we only search the existing number of items in the array using count variable.
+
         for (int i = 0; i < count; i++) {
 
            // if (itemName[i] != null) {
