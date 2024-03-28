@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductManagerTest {
     @Test
-    public void testAddProductCountSuccess(){
+    public void testAddProductCountSuccess() {
         //given
         ProductManager pm = new ProductManager();
         //when
@@ -22,7 +22,7 @@ public class ProductManagerTest {
         assertTrue(result1);
         assertTrue(result2);
 
-        assertTrue(pm.getNumberOfProducts()>0);
+        assertTrue(pm.getNumberOfProducts() > 0);
         assertEquals(3, pm.getNumberOfProducts());
     }
 
@@ -31,9 +31,9 @@ public class ProductManagerTest {
 
         //Given
         ProductManager pm = new ProductManager();
-        boolean result = pm.addProduct("laptop","computer",1000,10);
-        boolean result1 = pm.addProduct("monitor","computer",1000,10);
-        boolean result2 = pm.addProduct("desktop","computer",800,10);
+        boolean result = pm.addProduct("laptop", "computer", 1000, 10);
+        boolean result1 = pm.addProduct("monitor", "computer", 1000, 10);
+        boolean result2 = pm.addProduct("desktop", "computer", 800, 10);
 
 
         //When
@@ -46,10 +46,10 @@ public class ProductManagerTest {
         //Then
         assertTrue(result);
         assertTrue(result1);
-        assertEquals("laptop",name1);
-        assertEquals("monitor",name2);
-        assertEquals("desktop",name3);
-        assertEquals(3,productCount);
+        assertEquals("laptop", name1);
+        assertEquals("monitor", name2);
+        assertEquals("desktop", name3);
+        assertEquals(3, productCount);
 
 
     }
@@ -57,20 +57,21 @@ public class ProductManagerTest {
     @Test
     public void testSearchByProductNameFindProduct() {
         //given
-      ProductManager pm = new ProductManager();
-      pm.addProduct("laptop", "computer", 1000, 10);
-      pm.addProduct("desktop", "computer", 1000, 10);
-      pm.addProduct("monitor", "computer", 1000, 10);
-      pm.addProduct("keyboard", "computer", 1000, 10);
+        ProductManager pm = new ProductManager();
+        pm.addProduct("laptop", "computer", 1000, 10);
+        pm.addProduct("desktop", "computer", 1000, 10);
+        pm.addProduct("monitor", "computer", 1000, 10);
+        pm.addProduct("keyboard", "computer", 1000, 10);
 
         //when
-    String searchProductName = new String("laptop");
-    String productName = pm.searchByProductName(searchProductName);
+        String searchProductName = new String("laptop");
+        String productName = pm.searchByProductName(searchProductName);
 
         //then
-    assertEquals("laptop", productName);
+        assertEquals("laptop", productName);
     }
 
+    private String searchProduct;
 
     @Test
     public void testSearchByProductNameFindAllProducts() {
@@ -83,8 +84,9 @@ public class ProductManagerTest {
         pm.addProduct(itemName[2], "computer", 1000, 10);
         pm.addProduct(itemName[3], "computer", 1000, 10);
 
+
         //when
-        String[]  resultProduct = new String[4];
+        String[] resultProduct = new String[4];
         int i = 0;
         for (String name : itemName) {
             String productName = pm.searchByProductName(name.toUpperCase());
@@ -92,6 +94,7 @@ public class ProductManagerTest {
             i++;
         }
 
+        pm.searchByProductName(searchProduct);
         //then
         i = 0;
         for (String name : itemName) {
@@ -101,6 +104,21 @@ public class ProductManagerTest {
 
     }
 
+    @Test
+    public void testSearchByProductDescriptionNotFoundProduct() {
+        //given
+        ProductManager pm = new ProductManager();
+        pm.addProduct("laptop", "computer", 1000, 10);
+        pm.addProduct("desktop", "computer2", 1000, 10);
+        pm.addProduct("monitor", "computer3", 1000, 10);
+        pm.addProduct("keyboard", "computer4", 1000, 10);
 
+        //when
+        String searchProductDesc = new String("computer2");
+        String productDesc = pm.searchByProductDescription(searchProductDesc);
+
+        //then
+        assertEquals("NotFound", productDesc);
+    }
 
 }
