@@ -77,16 +77,18 @@ public class ProductManagerTest {
     public void testSearchByProductNameFindAllProducts() {
 
         //given
-        String[] itemName = {"laptop", "desktop", "keyboard", "monitor"};
+        String[] itemName = {"laptop", "desktop", "keyboard", "monitor","mouse"};
         ProductManager pm = new ProductManager();
         pm.addProduct(itemName[0], "computer", 1000, 10);
         pm.addProduct(itemName[1], "computer", 1000, 10);
         pm.addProduct(itemName[2], "computer", 1000, 10);
         pm.addProduct(itemName[3], "computer", 1000, 10);
+        pm.addProduct(itemName[4], "computer", 1000, 10);
+
 
 
         //when
-        String[] resultProduct = new String[4];
+        String[] resultProduct = new String[5];
         int i = 0;
         for (String name : itemName) {
             String productName = pm.searchByProductName(name.toUpperCase());
@@ -105,7 +107,7 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void testSearchByProductDescriptionNotFoundProduct() {
+    public void testSearchByProductDescriptionShouldBeFound() {
         //given
         ProductManager pm = new ProductManager();
         pm.addProduct("laptop", "computer", 1000, 10);
@@ -118,7 +120,43 @@ public class ProductManagerTest {
         String productDesc = pm.searchByProductDescription(searchProductDesc);
 
         //then
-        assertEquals("NotFound", productDesc);
+        assertEquals("computer2", productDesc);
+    }
+
+    @Test
+    public void testSearchByProductDescriptionShouldReturnProductName() {
+        //given
+        ProductManager pm = new ProductManager();
+        pm.addProduct("laptop", "computer", 1000, 10);
+        pm.addProduct("desktop", "computer2", 1000, 10);
+        pm.addProduct("monitor", "computer3", 1000, 10);
+        pm.addProduct("keyboard", "computer4", 1000, 10);
+
+        //when
+        String searchProductDesc = new String("computer2");
+        String productDesc = pm.searchByProductDescriptionReturnName(searchProductDesc);
+
+        //then
+        assertEquals("desktop", productDesc);
+    }
+
+    @Test
+    public void testSearchByProductDescriptionShouldReturnProductNameAndPrice() {
+        //given
+        ProductManager pm = new ProductManager();
+        pm.addProduct("laptop", "computer", 1000, 10);
+        pm.addProduct("desktop", "computer2", 7000, 10);
+        pm.addProduct("monitor", "computer3", 1000, 10);
+        pm.addProduct("keyboard", "computer4", 1000, 10);
+
+        //when
+        String searchProductDesc = new String("computer2");
+        String productDesc = pm.searchByProductDescriptionReturnName(searchProductDesc);
+        int result = pm.searchByProductDescriptionReturnPrice(searchProductDesc);
+
+        //then
+        assertEquals(7000, result);
+        assertEquals("desktop", productDesc);
     }
 
 }
