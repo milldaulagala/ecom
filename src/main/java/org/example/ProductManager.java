@@ -3,10 +3,10 @@ package org.example;
 
 public class ProductManager {
 
-    private final String[] itemName = new String[100];
-    private final String[] itemDescription = new String[100];
+    private final String[] itemName = new String[10];
+    private final String[] itemDescription = new String[10];
 
-    private final int[] itemPrice = new int[100];
+    private final int[] itemPrice = new int[10];
 
     private int count = 0;
 
@@ -100,5 +100,47 @@ public class ProductManager {
         }
         return result;
 
+    }
+
+    public String[] searchByProductDescriptionReturnNameAndPrice(String productDesc) {
+
+        String[] name = {"NotFound","0"};
+
+
+        for (int i = 0; i < count; i++) {
+
+            if (itemDescription[i].equalsIgnoreCase(productDesc)) {
+                name[0] = itemName[i];
+                name[1] = String.valueOf(itemPrice[i]);
+                break;
+            }
+
+        }
+        return name;
+
+    }
+
+    public int[] sortByProductPriceAscendingOrder() {
+
+        int[] prices;
+
+        prices = bubbleSort(itemPrice);
+
+        return prices;
+    }
+
+    public int[] bubbleSort(int[] prices) {
+
+        for (int i = prices.length; i > 0 ; i--) {
+            for (int j = 0; j < i-1; j++) {
+                if (prices[j] > prices [j+1]) {
+                    int temp = prices[j];
+                    prices[j] = prices[j+1];
+                    prices[j+1] = temp;
+                }
+            }
+        }
+
+        return prices;
     }
 }

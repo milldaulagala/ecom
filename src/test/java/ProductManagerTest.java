@@ -4,8 +4,7 @@ import org.example.ProductManager;
 
 import java.awt.geom.FlatteningPathIterator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductManagerTest {
     @Test
@@ -151,12 +150,41 @@ public class ProductManagerTest {
 
         //when
         String searchProductDesc = new String("computer2");
-        String productDesc = pm.searchByProductDescriptionReturnName(searchProductDesc);
-        int result = pm.searchByProductDescriptionReturnPrice(searchProductDesc);
+        String[] productNameAndPrice = pm.searchByProductDescriptionReturnNameAndPrice(searchProductDesc);
 
         //then
-        assertEquals(7000, result);
-        assertEquals("desktop", productDesc);
+        assertEquals("desktop", productNameAndPrice[0]);
+        assertEquals(String.valueOf(7000), productNameAndPrice[1]);
+    }
+
+    @Test
+    public void testSortedByAscending() {
+        //given
+        ProductManager pm = new ProductManager();
+        pm.addProduct("laptop", "computer", 4005, 10);
+        pm.addProduct("desktop", "computer2", 3002, 10);
+        pm.addProduct("monitor", "computer3", 2000, 10);
+        pm.addProduct("keyboard", "computer4", 10000, 10);
+        pm.addProduct("keyboard", "computer4", 0, 10);
+        pm.addProduct("keyboard", "computer4", 4400, 10);
+        pm.addProduct("keyboard", "computer4", 2200, 10);
+        pm.addProduct("keyboard", "computer4", 1500, 10);
+        pm.addProduct("keyboard", "computer4", 1100, 10);
+        pm.addProduct("keyboard", "computer4", 1000, 10);
+
+
+        //when
+        int [] prices = pm.sortByProductPriceAscendingOrder();
+
+        //then
+        int [] expectedPrices ={0,1000,1100,1500,2000,2200,3002,4005,4400,10000};
+        assertNotNull(prices);
+        assertEquals(expectedPrices.length, prices.length);
+
+        for (int i = 0; i < expectedPrices.length; i++) {
+            assertEquals(expectedPrices[i], prices[i]);
+
+        }
     }
 
 }
