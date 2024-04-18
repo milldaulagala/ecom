@@ -3,10 +3,10 @@ package org.example;
 
 public class ProductManager {
 
-    private final String[] itemName = new String[10];
-    private final String[] itemDescription = new String[10];
+    private final String[] itemName = new String[100];
+    private final String[] itemDescription = new String[100];
 
-    private final int[] itemPrice = new int[10];
+    private final int[] itemPrice = new int[100];
 
     private int count = 0;
 
@@ -122,16 +122,19 @@ public class ProductManager {
 
     public int[] sortByProductPriceAscendingOrder() {
 
-        int[] prices;
+        int[] pricesToSort = new int[count];
 
-        prices = bubbleSort(itemPrice);
+        for (int i = 0; i < count ; i++) {
+            pricesToSort[i] = itemPrice[i];
 
-        return prices;
+        }
+
+        return bubbleSort(pricesToSort);
     }
 
     public int[] bubbleSort(int[] prices) {
 
-        for (int i = prices.length; i > 0 ; i--) {
+        for (int i = count; i > 0 ; i--) {
             for (int j = 0; j < i-1; j++) {
                 if (prices[j] > prices [j+1]) {
                     int temp = prices[j];

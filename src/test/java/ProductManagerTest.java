@@ -171,13 +171,14 @@ public class ProductManagerTest {
         pm.addProduct("keyboard", "computer4", 1500, 10);
         pm.addProduct("keyboard", "computer4", 1100, 10);
         pm.addProduct("keyboard", "computer4", 1000, 10);
+        pm.addProduct("keyboard", "computer4", -100, 10);
 
 
         //when
         int [] prices = pm.sortByProductPriceAscendingOrder();
 
         //then
-        int [] expectedPrices ={0,1000,1100,1500,2000,2200,3002,4005,4400,10000};
+        int [] expectedPrices ={-100,0,1000,1100,1500,2000,2200,3002,4005,4400,10000};
         assertNotNull(prices);
         assertEquals(expectedPrices.length, prices.length);
 
