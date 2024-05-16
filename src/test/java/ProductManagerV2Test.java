@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ProductManagerV2Test {
 
     @Test
-    public void addProductTest() {
+    public void testAddProductSuccess() {
         // given
         String itemName = "Desktop";
         String itemDescription = "Computer Monitor";
