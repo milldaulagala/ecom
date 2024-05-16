@@ -188,4 +188,26 @@ public class ProductManagerTest {
         }
     }
 
+    @Test
+    public void testSearchByProductPriceShouldReturnProductName() {
+        //given
+        ProductManager pm = new ProductManager();
+        pm.addProduct("laptop", "computer", 1020, 10);
+        pm.addProduct("desktop", "computer2", 1020, 10);
+        pm.addProduct("monitor", "computer3", 1020, 10);
+        pm.addProduct("keyboard", "computer4", 1020, 10);
+
+        //when
+        int searchProductPrice = 1020;
+        String[] productName = pm.searchByProductPriceReturnName(searchProductPrice);
+
+        //then
+        assertEquals("laptop", productName[0]);
+        assertEquals("desktop", productName[1]);
+        assertEquals("monitor", productName[2]);
+        assertEquals("keyboard", productName[3]);
+
+
+    }
+
 }

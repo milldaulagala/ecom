@@ -1,6 +1,8 @@
 package org.example;
 
 
+import java.util.Objects;
+
 public class ProductManager {
 
     private final String[] itemName = new String[100];
@@ -145,5 +147,23 @@ public class ProductManager {
         }
 
         return prices;
+    }
+
+    public String[] searchByProductPriceReturnName(int productPrice) {
+
+        String[] name = new String[count];
+        name[0] = "NotFound";
+        name[1] = "0";
+
+        for (int i = 0; i < count; i++) {
+
+            if (Objects.equals(itemPrice[i], productPrice)) {
+                name[i] = itemName[i];
+
+            }
+
+        }
+        return name;
+
     }
 }
